@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class GhostChase : GhostBehavior
+public class GhostFollow : GhostBaseState
 {
     private void OnDisable()
     {
-        ghost.scatter.Enable();
+        ghost.GetComponent<GhostParts>().scatter.Enable();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -12,16 +12,14 @@ public class GhostChase : GhostBehavior
         Node node = other.GetComponent<Node>();
 
         // Do nothing while the ghost is frightened
-        if (node != null && enabled && !ghost.frightened.enabled)
+        if (node != null && enabled && !ghost.GetComponent<GhostParts>().ghostppe.enabled)
         {
             Vector2 direction = Vector2.zero;
             float minDistance = float.MaxValue;
 
-            // Find the available direction that moves closet to pacman
+            // Find the available direction that moves closest to pacman
             foreach (Vector2 availableDirection in node.availableDirections)
             {
-                // If the distance in this direction is less than the current
-                // min distance then this direction becomes the new closest
                 Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
                 float distance = (ghost.target.position - newPosition).sqrMagnitude;
 
@@ -32,8 +30,7 @@ public class GhostChase : GhostBehavior
                 }
             }
 
-            ghost.movement.SetDirection(direction);
+            ghost.GetComponent<GhostParts>().move.SetDirection(direction);
         }
     }
-
 }

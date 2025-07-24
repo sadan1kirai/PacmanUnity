@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GhostFrightened : GhostBehavior
+public class GhostPPE : GhostBaseState
 {
     public SpriteRenderer body;
     public SpriteRenderer eyes;
@@ -34,8 +34,11 @@ public class GhostFrightened : GhostBehavior
     private void Eaten()
     {
         eaten = true;
-        ghost.SetPosition(ghost.home.inside.position);
-        ghost.home.Enable(duration);
+
+        var parts = ghost.GetComponent<GhostParts>();
+
+        ghost.SetPosition(parts.spawn.inside.position);
+        parts.spawn.Enable(duration);
 
         body.enabled = false;
         eyes.enabled = true;
@@ -56,13 +59,13 @@ public class GhostFrightened : GhostBehavior
     private void OnEnable()
     {
         blue.GetComponent<AnimatedSprite>().Restart();
-        ghost.movement.speedMultiplier = 0.5f;
+        ghost.GetComponent<GhostParts>().move.speedMultiplier = 0.5f;
         eaten = false;
     }
 
     private void OnDisable()
     {
-        ghost.movement.speedMultiplier = 1f;
+        ghost.GetComponent<GhostParts>().move.speedMultiplier = 1f;
         eaten = false;
     }
 
@@ -75,11 +78,8 @@ public class GhostFrightened : GhostBehavior
             Vector2 direction = Vector2.zero;
             float maxDistance = float.MinValue;
 
-            // Find the available direction that moves farthest from pacman
             foreach (Vector2 availableDirection in node.availableDirections)
             {
-                // If the distance in this direction is greater than the current
-                // max distance then this direction becomes the new farthest
                 Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
                 float distance = (ghost.target.position - newPosition).sqrMagnitude;
 
@@ -90,7 +90,7 @@ public class GhostFrightened : GhostBehavior
                 }
             }
 
-            ghost.movement.SetDirection(direction);
+            ghost.GetComponent<GhostParts>().move.SetDirection(direction);
         }
     }
 
@@ -98,10 +98,10 @@ public class GhostFrightened : GhostBehavior
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
-            if (enabled) {
+            if (enabled)
+            {
                 Eaten();
             }
         }
     }
-
 }
