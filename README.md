@@ -20,7 +20,3 @@ Eat all the pellets, avoid the ghosts, and beat the high score!
 - 💥 Power pellet mode
 - 🏆 High score tracking
 - 🎮 Smooth and responsive controls
-
----
-
-## 📦 Project Structure
