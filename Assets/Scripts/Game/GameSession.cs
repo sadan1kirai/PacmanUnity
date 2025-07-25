@@ -6,6 +6,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] private Ghost[] ghosts;
     [SerializeField] private Pacman pacman;
     [SerializeField] private Transform pellets;
+    [SerializeField] private GameOverScreenUI gameOverUI;
+
 
     public int Score { get; private set; }
     public int Lives { get; private set; }
@@ -68,7 +70,11 @@ public class GameSession : MonoBehaviour
         }
 
         pacman.gameObject.SetActive(false);
+
+        gameOverUI.ShowGameOver(Score); // 🟢 Artık null değil
     }
+
+
 
     public void PacmanEaten()
     {
