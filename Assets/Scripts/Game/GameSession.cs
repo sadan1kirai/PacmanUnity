@@ -98,7 +98,7 @@ public class GameSession : MonoBehaviour
         int points = ghost.points * ghostMultiplier;
         Score += points;
         ui.UpdateScore(Score);
-        TryUpdateHighScore(); // 🟢 EKLENDİ
+        TryUpdateHighScore();
         ghostMultiplier++;
     }
 
@@ -108,7 +108,7 @@ public class GameSession : MonoBehaviour
 
         Score += pellet.points;
         ui.UpdateScore(Score);
-        TryUpdateHighScore(); // 🟢 EKLENDİ
+        TryUpdateHighScore();
 
         if (!HasRemainingPellets())
         {

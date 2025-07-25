@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public CanvasGroup pauseCanvas;
-    public Text[] menuItems;         // Resume ve Main Menu yazıları
-    public Text arrowText;           // ">" işareti
-    public float offsetX = -40f;     // Ok sola hizalansın
+    public Text[] menuItems;    
+    public Text arrowText;   
+    public float offsetX = -40f; 
 
     private int selectedIndex = 0;
     private bool isPaused = false;

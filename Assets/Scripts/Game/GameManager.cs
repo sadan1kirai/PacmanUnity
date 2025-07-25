@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
             Instance = null;
     }
 
-    // Yönlendirici methodlar (opsiyonel)
     public void PacmanEaten() => events.OnPacmanEaten();
     public void GhostEaten(Ghost ghost) => events.OnGhostEaten(ghost);
     public void PelletEaten(Pellet pellet) => events.OnPelletEaten(pellet);
