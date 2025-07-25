@@ -7,6 +7,8 @@ public class MenuController : MonoBehaviour
     public Text[] menuItems;     // Play ve Exit
     public Text arrowText;       // > işareti olan Text
     public float offsetX = -40f; // Ok sola hizalansın
+    public NameInputManager nameInputManager;
+
 
     private int selectedIndex = 0;
 
@@ -47,7 +49,11 @@ public class MenuController : MonoBehaviour
     {
         if (selectedIndex == 0)
         {
-            SceneManager.LoadScene("Pacman");
+            // Play seçildiğinde önce isim girme paneli açılır
+            nameInputManager.Open(() =>
+            {
+                SceneManager.LoadScene("Pacman"); // sahne adın buysa
+            });
         }
         else if (selectedIndex == 1)
         {
@@ -58,5 +64,6 @@ public class MenuController : MonoBehaviour
     #endif
         }
     }
+
 
 }
