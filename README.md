@@ -5,11 +5,11 @@ Eat all the pellets, avoid the ghosts, and beat the high score!
 
 ---
 
-## 📸 Gameplay Preview
+## 🎮 Gameplay Preview
 
-![Game Screenshot](Assets/Menu.png)
-![Game Screenshot](Assets/Pause.png)
-![Game Screenshot](Assets/InGame.png)
+![Menu Screen](Menu.png)
+![In-Game Screen](InGame.png)
+![Pause Screen](Pause.png)
 
 ---
 
