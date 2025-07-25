@@ -8,7 +8,6 @@ public class GameSession : MonoBehaviour
     [SerializeField] private Transform pellets;
     [SerializeField] private GameOverScreenUI gameOverUI;
 
-
     public int Score { get; private set; }
     public int Lives { get; private set; }
 
@@ -34,6 +33,7 @@ public class GameSession : MonoBehaviour
 
         ui.UpdateScore(Score);
         ui.UpdateLives(Lives);
+        ui.UpdateHighScore(HighScoreManager.GetHighScore());
 
         NewRound();
     }
@@ -62,6 +62,9 @@ public class GameSession : MonoBehaviour
 
     private void GameOver()
     {
+        HighScoreManager.SetHighScore(Score);
+        ui.UpdateHighScore(HighScoreManager.GetHighScore());
+
         ui.SetGameOverVisible(true);
 
         foreach (Ghost ghost in ghosts)
@@ -71,10 +74,8 @@ public class GameSession : MonoBehaviour
 
         pacman.gameObject.SetActive(false);
 
-        gameOverUI.ShowGameOver(Score); // 🟢 Artık null değil
+        gameOverUI.ShowGameOver(Score);
     }
-
-
 
     public void PacmanEaten()
     {
@@ -97,6 +98,7 @@ public class GameSession : MonoBehaviour
         int points = ghost.points * ghostMultiplier;
         Score += points;
         ui.UpdateScore(Score);
+        TryUpdateHighScore(); // 🟢 EKLENDİ
         ghostMultiplier++;
     }
 
@@ -106,6 +108,7 @@ public class GameSession : MonoBehaviour
 
         Score += pellet.points;
         ui.UpdateScore(Score);
+        TryUpdateHighScore(); // 🟢 EKLENDİ
 
         if (!HasRemainingPellets())
         {
@@ -125,6 +128,15 @@ public class GameSession : MonoBehaviour
 
         CancelInvoke(nameof(ResetGhostMultiplier));
         Invoke(nameof(ResetGhostMultiplier), pellet.duration);
+    }
+
+    private void TryUpdateHighScore()
+    {
+        if (Score > HighScoreManager.GetHighScore())
+        {
+            HighScoreManager.SetHighScore(Score);
+            ui.UpdateHighScore(Score);
+        }
     }
 
     private void ResetGhostMultiplier()

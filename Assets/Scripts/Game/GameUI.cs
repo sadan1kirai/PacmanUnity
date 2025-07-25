@@ -6,6 +6,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private Text livesText;
     [SerializeField] private Text gameOverText;
+    [SerializeField] private Text highScoreText; // 🆕 EKLENDİ
 
     public void UpdateScore(int score)
     {
@@ -20,5 +21,10 @@ public class GameUI : MonoBehaviour
     public void SetGameOverVisible(bool isVisible)
     {
         gameOverText.enabled = isVisible;
+    }
+
+    public void UpdateHighScore(int highScore) // 🆕 EKLENDİ
+    {
+        highScoreText.text = "HIGH SCORE : " + highScore.ToString().PadLeft(2, '0');
     }
 }
