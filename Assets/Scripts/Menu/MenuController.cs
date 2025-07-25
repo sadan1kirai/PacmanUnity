@@ -4,11 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public Text[] menuItems;     // Play ve Exit
-    public Text arrowText;       // > işareti olan Text
-    public float offsetX = -40f; // Ok sola hizalansın
-    public NameInputManager nameInputManager;
-
+    public Text[] menuItems;//playexit
+    public Text arrowText;
+    public float offsetX = -40f;//padding 
 
     private int selectedIndex = 0;
 
@@ -49,11 +47,7 @@ public class MenuController : MonoBehaviour
     {
         if (selectedIndex == 0)
         {
-            // Play seçildiğinde önce isim girme paneli açılır
-            nameInputManager.Open(() =>
-            {
-                SceneManager.LoadScene("Pacman"); // sahne adın buysa
-            });
+            SceneManager.LoadScene("Pacman");
         }
         else if (selectedIndex == 1)
         {
@@ -64,6 +58,7 @@ public class MenuController : MonoBehaviour
     #endif
         }
     }
+
 
 
 }
